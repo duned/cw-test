@@ -30,8 +30,13 @@ The API has no third-party runtime packages.
 
 Add future routes as separate `Map...Endpoints` extension modules under
 `src/RandomApi/Endpoints`, following `MapHealthEndpoints`. Register modules in
-`Program.cs`; final endpoint integration belongs to issue 1. No random-data
-endpoints are included in this scaffold.
+`Program.cs`; final endpoint integration belongs to issue 1.
+
+`MapUuidEndpoints` defines `GET /api/random/uuid`, returning HTTP 200 with
+`{"uuid":"123e4567-e89b-42d3-a456-426614174000"}` (example value). The `uuid`
+property is a newly generated random UUID string in canonical lowercase
+`xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` format. The module is tested in an isolated
+host and is not yet registered in `Program.cs`; issue 1 will wire it into the app.
 
 Request-binding failures (such as malformed JSON, invalid typed parameters, or
 unsupported body content types) return `{"error":"Invalid request input."}` with
