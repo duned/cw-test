@@ -28,6 +28,12 @@ dotnet test RandomApi.slnx
 The test project uses xUnit and an in-memory ASP.NET Core application host.
 The API has no third-party runtime packages.
 
+`MapRandomQuoteEndpoints` defines `GET /api/random/quote`, returning HTTP 200
+with JSON such as `{"id":"descartes-think","text":"I think, therefore I am.","attribution":"René Descartes"}`.
+Each request selects from four built-in quotes without calling an external
+service. IDs remain stable; attribution is `null` when unknown. The module is
+tested in an isolated host; issue 1 will register it in `Program.cs`.
+
 Add future routes as separate `Map...Endpoints` extension modules under
 `src/RandomApi/Endpoints`, following `MapHealthEndpoints`. Register modules in
 `Program.cs`; final endpoint integration belongs to issue 1.
