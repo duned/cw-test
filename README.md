@@ -60,3 +60,10 @@ unsupported body content types) return `{"error":"Invalid request input."}` with
 HTTP 400 or 415. Binding exceptions are enabled in every environment and handled
 by the input-error middleware without exposing parser details. Future endpoints
 can return the shared `ApiError` record for their own validation failures.
+
+`MapRandomChoiceEndpoints()` defines `GET /api/random/choice?items=red&items=blue`,
+returning JSON such as `{"item":"red","count":2}`. Empty values are ignored;
+non-empty values retain their text, including whitespace. Duplicate values count
+as separate candidates, and each candidate has an equal chance of selection.
+Missing items or only empty values return HTTP 400 with the shared `{"error":"..."}`
+shape. The module is tested in an isolated host; issue 1 will register it in `Program.cs`.
