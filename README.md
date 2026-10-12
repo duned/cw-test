@@ -38,6 +38,17 @@ property is a newly generated random UUID string in canonical lowercase
 `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` format. The module is tested in an isolated
 host and is not yet registered in `Program.cs`; issue 1 will wire it into the app.
 
+The dice module exposes `MapDiceEndpoints()` for integration by issue 1.
+Once registered, `GET /api/random/dice?count=2&sides=6` returns JSON such as
+`{"count":2,"sides":6,"rolls":[3,5],"total":8}`. Omitted parameters default
+to `count=1` and `sides=6`. Each roll is in the inclusive range `1..sides`.
+Count must be an integer from 1 to 100, and sides must be an integer from 1
+to 1,000,000. These limits bound allocation and work per request and keep the
+maximum total (100,000,000) within a 32-bit integer. Invalid, empty, repeated,
+or out-of-range parameters return HTTP 400 with the shared `{"error":"..."}`
+shape and a message describing the valid range. The module is tested in its
+own in-memory host without changing the application entry point.
+
 Request-binding failures (such as malformed JSON, invalid typed parameters, or
 unsupported body content types) return `{"error":"Invalid request input."}` with
 HTTP 400 or 415. Binding exceptions are enabled in every environment and handled
