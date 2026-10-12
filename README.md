@@ -34,6 +34,11 @@ Each request selects from four built-in quotes without calling an external
 service. IDs remain stable; attribution is `null` when unknown. The module is
 tested in an isolated host; issue 1 will register it in `Program.cs`.
 
+`MapRandomProfileEndpoints` defines `GET /api/random/profile`, returning HTTP 200
+with a stable JSON shape such as `{"displayName":"Mock Silver Otter","username":"mock-silver-otter-1234","email":"mock-silver-otter-1234@example.com"}`.
+Profiles use only local fictional samples, and all emails use `example.com`.
+The module is tested in an isolated host; issue 1 will register it in `Program.cs`.
+
 Add future routes as separate `Map...Endpoints` extension modules under
 `src/RandomApi/Endpoints`, following `MapHealthEndpoints`. Register modules in
 `Program.cs`; final endpoint integration belongs to issue 1.
