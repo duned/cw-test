@@ -7,6 +7,7 @@ builder.Services.Configure<Microsoft.AspNetCore.Routing.RouteHandlerOptions>(opt
 var app = builder.Build();
 app.UseMiddleware<RandomApi.RequestInputErrorMiddleware>();
 app.MapHealthEndpoints();
+app.MapRandomPingEndpoints();
 app.Run();
 
 // Exposes the entry point to the integration test host.

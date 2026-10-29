@@ -19,6 +19,8 @@ curl http://localhost:5000/health
 
 `GET /health` returns HTTP 200 with `{"status":"ok"}`.
 
+`GET /api/random/ping` returns HTTP 200 with `{"message":"pong"}`.
+
 Run the tests:
 
 ```sh
